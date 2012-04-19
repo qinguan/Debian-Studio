@@ -32,7 +32,7 @@ virtual_image_info_dic = {
 
 
 def random_str(randomlength=8):
-	"""generate a random string"""
+	"""generate a random string for file name"""
 
 	str = ''
 	chars = 'AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz0123456789'
@@ -71,17 +71,23 @@ def generate_script(param):
 			for file in files:
 				os.system("cat " + file + " >> " + temp_filename)
 
-	cmd = ""
-	if(os.path.exists("/usr/sbin/grml-debootstrap")):
-		cmd += "/usr/sbin/grml-debootstrap --vmfile"
+	try:
+		cmd = ""
+		if(os.path.exists("/usr/sbin/grml-debootstrap")):
+			cmd += "/usr/sbin/grml-debootstrap --vmfile"
 
-	for k in param.keys():
-		if(param[k] != None):
-			cmd += " --" + k + " " + param[k]
+		for k in param.keys():
+			if(param[k] != None):
+				cmd += " --" + k + " " + param[k]
 
-	os.system("echo " + cmd + " >> " + scriptname)
-	os.system("chmod +x " + scriptname)
-#	print scriptname
+		os.system("echo " + cmd + " >> " + scriptname)
+		os.system("chmod 755 " + scriptname)
+		return scriptname
+
+	except:
+		os.system("rm " + scriptname)
+		print "something wrong occures in command generation."
+
 
 #test:
 generate_script(virtual_image_info_dic)
