@@ -1,0 +1,88 @@
+<!-- a descriptor template file-->
+
+<virtual_image_info>
+	<descripter>it is just a test!</descriptor>
+	
+	
+	<!--base,gnome,kde-->
+	<image_type>base<image_type>
+	
+	<base_info>
+		<arch>i386</arch>
+		<bootappend>None</bootappend>
+		<config>/etc/debootstrap/config</config>
+		<chroot-scripts>None</chroot-scripts>
+		<condir>/etc/debootstrap</condir>
+		<debconf>None</debconf>
+		<filesystem>None</filesystem>
+		<hostname>xuguojuun_test</hostname>
+		<iso>None</iso>
+		<mirror>http://mirrors.163.com/debian</mirror>
+		<packages>/etc/debootstrap/debian.packages</packages>
+		<password>123<password>
+		<release>None</release>
+		<vmsize>1G</vmsize>
+		<pre-scripts>None</pre-scripts>
+		<scripts>None</scripts>
+		<target>/mnt/test/test.img</target>
+		
+		<software_extra>
+			<software>Chrome</software>
+			<software>python</software>
+			<software>gedit</software>
+			<software>perl</software>
+			<software>gnuplot</software>
+		</sofrtare_extre>
+		
+	</base_info>
+	
+	<default_locale>
+		<language>English(US)</language>
+		<keyboard_layout>English(US)</keyboard_layout>
+	<default_locale>
+	
+	<default_time_zone>
+		<region>Global<region>
+		<time_zone>UTC<time_zone>
+	<default_time_zone>
+	
+	<!--
+		1.Do not configure network
+		2.Configure network during first boot
+		3.Use NetworkManager to configure the network at run-time
+		4.Discover network settings automatically (DHCP)
+		5.Manually configure network
+	-->
+	<network>DHCP</network>
+	
+	<!--
+		True is enabel firewall while false is not.
+		1.Open SSH port (22)
+		2.Open HTTP ports (80, 443)
+	-->
+	<firewall value='true'>
+		<mode>SSH<mode>
+	<firewall>
+	
+	<!--
+		1.Single user
+		2.Multiuser
+		3.Normal console
+		2.Graphical Login
+	-->
+	<default_runlevel>Normal console</default_runlevel>
+	
+	<!--unit:MB-->
+	<memory>512</memory>
+	
+	<!--unit:G-->
+	<disk>8</disk>
+	
+	<!--add custome scripts-->
+	<scripts>None</sripts>
+	
+	<!--add user file-->
+	<extra_file>None<extra_file>
+	
+	
+</virtual_image_info>
