@@ -4,7 +4,7 @@ import os
 from random import Random
 
 virtual_image_info_dic = {
-	"arch":"i386",
+	"arch":None,
 	"bootappend":None,
 	"config":"/etc/debootstrap/config",
 	"chroot-scripts":None,
@@ -55,21 +55,20 @@ def generate_script(param):
 	"""generate a script for generating virtual image."""
 	""" param:Command line arguments"""
 
-	#generate the script name
-	scriptname = random_str()
-
-	os.system("echo '#!/bin/bash'> " + scriptname)
-
-	
 	if(os.path.exists("/etc/debootstrap/packages")):
-		temp_filename = random_str()
-		os.system("cat /etc/debootstrap/packages > " + temp_filename)
-		param["packages"] = temp_filename
+		temp_packages = "/tmp/" + random_str()
+		os.system("cat /etc/debootstrap/packages > " + temp_packages)
+		param["packages"] = temp_packages
 
 	for root,dirs,files in os.walk("/etc/debootstrap/extrapackages"):
 		if(len(files) != 0 ):
 			for file in files:
-				os.system("cat " + file + " >> " + temp_filename)
+				os.system("cat " + file + " >> " + temp_packages)
+
+	#generate the script name
+	scriptname = random_str()
+
+	os.system("echo '#!/bin/bash'> " + scriptname)
 
 	try:
 		cmd = ""
@@ -82,10 +81,11 @@ def generate_script(param):
 
 		os.system("echo " + cmd + " >> " + scriptname)
 		os.system("chmod 755 " + scriptname)
-		return scriptname
+		return scriptname,temp_packages
 
 	except:
 		os.system("rm " + scriptname)
+		os.system("rm " + temp_packages)
 		print "something wrong occures in command generation."
 
 
