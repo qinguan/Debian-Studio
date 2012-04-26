@@ -1,0 +1,2 @@
+#!/bin/bash
+/usr/sbin/grml-debootstrap --vmfile --password 123 --target /mnt/test/test.img --confdir /etc/debootstrap --config /etc/debootstrap/config --vmsize 1G --hostname xuguojun_test --mirror http://mirrors.163.com/debian --packages /tmp/EbHdX79k
